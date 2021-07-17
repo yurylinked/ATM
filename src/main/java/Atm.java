@@ -32,7 +32,7 @@ private Object monitor=new Object();
                int leftinAtm = getAvailableInATM() - request;
                setAvailableInATM(leftinAtm);
                System.out.println(name + " withdrew " + request + " money");
-               System.out.println("left in the ATM" + leftinAtm);
+               System.out.println("left money in the ATM " + leftinAtm);
            }
            return getAvailableInATM();
        }
