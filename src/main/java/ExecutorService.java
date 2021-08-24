@@ -37,8 +37,7 @@ public class ExecutorService {
 
         for (int i = 0; i < arrayList.size(); i++) {// ??? в этом цикле проблема так как
             // колво четных чисел в коллекции не может быть 500(результат всегда 500..)
-            arrayList.get(i);
-            if (i % 2 == 0) {
+            if (arrayList.get(i) % 2 == 0) {
                 numberOfEvenNumbers++;
             }
         }
