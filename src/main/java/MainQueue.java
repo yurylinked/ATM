@@ -1,5 +1,6 @@
 
 public class MainQueue {
+
     private static final String A = "A";
     private static final String B = "B";
     private static final String C = "C";
@@ -7,22 +8,23 @@ public class MainQueue {
     private static String nextletter = A;
 
     public static void main(String[] args) {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 synchronized (MONITOR) {
                     for (int i = 0; i < 5; i++) {
-                        if (!nextletter.equals(A)) {
+                        while (!nextletter.equals(A)) {
                             try {
                                 MONITOR.wait();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                        } else {
-                            System.out.print(A);
-                            nextletter = B;
-                            MONITOR.notifyAll();
                         }
+                        System.out.print(A);
+                        nextletter = B;
+                        MONITOR.notifyAll();
+
                     }
                 }
             }
@@ -33,17 +35,17 @@ public class MainQueue {
             public void run() {
                 synchronized (MONITOR) {
                     for (int i = 0; i < 5; i++) {
-                        if (!nextletter.equals(B)) {
+
+                        while (!nextletter.equals(B)) {
                             try {
                                 MONITOR.wait();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                        } else {
-                            System.out.print(B);
-                            nextletter = C;
-                            MONITOR.notifyAll();
                         }
+                        System.out.print(B);
+                        nextletter = C;
+                        MONITOR.notifyAll();
                     }
                 }
             }
@@ -54,20 +56,22 @@ public class MainQueue {
             public void run() {
                 synchronized (MONITOR) {
                     for (int i = 0; i < 5; i++) {
-                        if (!nextletter.equals(C)) {
+
+                        while (!nextletter.equals(C)) {
                             try {
                                 MONITOR.wait();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                        } else {
-                            System.out.print(C);
-                            nextletter = A;
-                            MONITOR.notifyAll();
                         }
+                        System.out.print(C);
+                        nextletter = A;
+                        MONITOR.notifyAll();
                     }
                 }
             }
         }).start();
+
     }
+
 }
